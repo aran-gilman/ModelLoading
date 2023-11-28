@@ -1,8 +1,8 @@
 #include "BufferOperations.h"
 
-void BindVertexArray(const ManagedVertexArray& buffer)
+void BindVertexArray(const ManagedVertexArray& vao)
 {
-	glBindVertexArray(buffer.Name());
+	glBindVertexArray(vao.Name());
 }
 
 void UnbindBuffer(BufferBindingTarget target)
@@ -13,4 +13,9 @@ void UnbindBuffer(BufferBindingTarget target)
 void UnbindVertexArray()
 {
 	glBindVertexArray(0);
+}
+
+void SetVertexArrayElements(const ManagedVertexArray& vao, const ManagedBuffer<BufferBindingTarget::ElementArray>& ebo)
+{
+	glVertexArrayElementBuffer(vao.Name(), ebo.Name());
 }

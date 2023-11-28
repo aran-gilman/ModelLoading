@@ -20,6 +20,8 @@ void BindBuffer(const ManagedBuffer<Target>& buffer)
 	glBindBuffer(static_cast<GLenum>(Target), buffer.Name());
 }
 
-void BindVertexArray(const ManagedVertexArray& buffer);
+void BindVertexArray(const ManagedVertexArray& vao);
 void UnbindBuffer(BufferBindingTarget target);
 void UnbindVertexArray();
+
+void SetVertexArrayElements(const ManagedVertexArray& vao, const ManagedBuffer<BufferBindingTarget::ElementArray>& ebo);

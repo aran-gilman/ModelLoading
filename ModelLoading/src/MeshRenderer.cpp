@@ -7,10 +7,7 @@ MeshRenderer::MeshRenderer(const MeshData& meshData)
 {
 	SetBufferData(vbo, meshData.vertices, BufferUsage::StaticDraw);
 	SetBufferData(ebo, meshData.indices, BufferUsage::StaticDraw);
-
-	BindVertexArray(vao);
-	BindBuffer(ebo);
-	UnbindVertexArray();
+	SetVertexArrayElements(vao, ebo);
 }
 
 void MeshRenderer::Render()
