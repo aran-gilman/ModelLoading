@@ -43,3 +43,5 @@ private:
 	unsigned int name;
 };
 
+using VertexShader = Shader<ShaderType::Vertex>;
+using FragmentShader = Shader<ShaderType::Fragment>;

@@ -139,6 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\ShaderProgram.cpp" />
     <ClCompile Include="src\BufferOperations.cpp" />
     <ClCompile Include="src\GLEnums.cpp" />
     <ClCompile Include="src\ManagedVertexArray.cpp" />
@@ -147,6 +148,7 @@
     <ClCompile Include="src\Window.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\ShaderProgram.h" />
     <ClInclude Include="src\Shader.h" />
     <ClInclude Include="src\GLEnums.h" />
     <ClInclude Include="src\BufferOperations.h" />

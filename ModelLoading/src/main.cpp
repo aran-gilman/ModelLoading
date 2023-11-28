@@ -1,8 +1,8 @@
 #include <iostream>
 #include <stdexcept>
 
-#include "GLEnums.h"
 #include "Shader.h"
+#include "ShaderProgram.h"
 #include "Window.h"
 
 const char* vertexShaderSource = R"s(
@@ -29,8 +29,10 @@ int main(int argc, char* argv[])
 	{
 		Window window(800, 600, "Model Loading Test");
 
-		Shader<ShaderType::Vertex> vertexShader(vertexShaderSource);
-		Shader<ShaderType::Fragment> fragmentShader(fragmentShaderSource);
+		VertexShader vertexShader(vertexShaderSource);
+		FragmentShader fragmentShader(fragmentShaderSource);
+
+		ShaderProgram(vertexShader, fragmentShader);
 
 		window.Display();
 	}
