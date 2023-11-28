@@ -42,8 +42,7 @@ public:
 	{
 		if (this != &other)
 		{
-			glDeleteBuffers(1, &name);
-			name = std::exchange(other.name, 0);
+			std::swap(name, other.name);
 		}
 		return *this;
 	}
