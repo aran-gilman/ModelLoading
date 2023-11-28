@@ -15,8 +15,8 @@ public:
 	MeshRenderer& operator=(const MeshRenderer&) = delete;
 
 private:
-	ManagedBuffer vbo;
-	ManagedBuffer ebo;
+	ManagedBuffer<BufferBindingTarget::Array> vbo;
+	ManagedBuffer<BufferBindingTarget::ElementArray> ebo;
 	ManagedVertexArray vao;
 };
 

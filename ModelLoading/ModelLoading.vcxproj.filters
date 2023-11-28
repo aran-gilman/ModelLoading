@@ -24,9 +24,6 @@
     <ClCompile Include="src\MeshRenderer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\ManagedBuffer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\ManagedVertexArray.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

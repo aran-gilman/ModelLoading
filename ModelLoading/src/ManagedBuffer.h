@@ -1,10 +1,22 @@
 #pragma once
 
+#include <GL/glew.h>
+
+#include "GLEnums.h"
+
+template <BufferBindingTarget Target>
 class ManagedBuffer
 {
 public:
-	ManagedBuffer();
-	~ManagedBuffer();
+	ManagedBuffer()
+	{
+		glCreateBuffers(1, &name);
+	}
+
+	~ManagedBuffer()
+	{
+		glDeleteBuffers(1, &name);
+	}
 
 	unsigned int Name() const { return name; }
 
