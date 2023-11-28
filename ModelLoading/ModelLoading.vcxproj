@@ -144,6 +144,8 @@
     <ClCompile Include="src\Window.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\GLEnums.h" />
+    <ClInclude Include="src\BufferOperations.h" />
     <ClInclude Include="src\MeshData.h" />
     <ClInclude Include="src\ManagedVertexArray.h" />
     <ClInclude Include="src\ManagedBuffer.h" />
