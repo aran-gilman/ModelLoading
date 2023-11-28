@@ -2,6 +2,7 @@
 
 #include <format>
 #include <stdexcept>
+#include <utility>
 
 #include <GL/glew.h>
 
@@ -25,6 +26,20 @@ ShaderProgram::ShaderProgram(const VertexShader& vertexShader, const FragmentSha
 ShaderProgram::~ShaderProgram()
 {
 	glDeleteProgram(name);
+}
+
+ShaderProgram::ShaderProgram(ShaderProgram&& other) noexcept :
+	name(std::exchange(other.name, 0))
+{
+}
+
+ShaderProgram& ShaderProgram::operator=(ShaderProgram&& other) noexcept
+{
+	if (this != &other)
+	{
+		std::swap(name, other.name);
+	}
+	return *this;
 }
 
 void BindShaderProgram(const ShaderProgram& shaderProgram)
