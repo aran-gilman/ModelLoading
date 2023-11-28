@@ -27,8 +27,9 @@ MeshRenderer::MeshRenderer(const MeshData& meshData, std::shared_ptr<ShaderProgr
 	drawCount = meshData.indices.size();
 }
 
-void MeshRenderer::Render()
+void MeshRenderer::Render() const
 {
 	BindShaderProgram(*shaderProgram);
+	BindVertexArray(vao);
 	glDrawElements(GL_TRIANGLES, drawCount, GL_UNSIGNED_INT, 0);
 }

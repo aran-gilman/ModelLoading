@@ -1,6 +1,6 @@
 #include "MeshData.h"
 
-MeshData CreateTriangle()
+MeshData CreateQuad()
 {
     MeshData mesh;
     mesh.vertices = {

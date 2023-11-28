@@ -1,3 +1,4 @@
+#include <functional>
 #include <iostream>
 #include <memory>
 #include <stdexcept>
@@ -36,7 +37,8 @@ int main(int argc, char* argv[])
 		FragmentShader fragmentShader(fragmentShaderSource);
 		std::shared_ptr<ShaderProgram> shaderProgram = std::make_shared<ShaderProgram>(vertexShader, fragmentShader);
 
-		MeshRenderer meshRenderer(CreateTriangle(), shaderProgram);
+		MeshRenderer meshRenderer(CreateQuad(), shaderProgram);
+		window.SetRenderCallback(std::bind_front(&MeshRenderer::Render, &meshRenderer));
 
 		window.Display();
 	}
