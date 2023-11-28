@@ -17,3 +17,4 @@ struct MeshData
 	std::vector<unsigned int> indices;
 };
 
+MeshData CreateTriangle();

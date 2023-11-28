@@ -4,7 +4,6 @@
 #include <string>
 
 class GLFWwindow;
-class MeshRenderer;
 
 class Window
 {

@@ -1,6 +1,9 @@
 #include <iostream>
+#include <memory>
 #include <stdexcept>
 
+#include "MeshData.h"
+#include "MeshRenderer.h"
 #include "Shader.h"
 #include "ShaderProgram.h"
 #include "Window.h"
@@ -31,7 +34,9 @@ int main(int argc, char* argv[])
 
 		VertexShader vertexShader(vertexShaderSource);
 		FragmentShader fragmentShader(fragmentShaderSource);
-		ShaderProgram shaderProgram(vertexShader, fragmentShader);
+		std::shared_ptr<ShaderProgram> shaderProgram = std::make_shared<ShaderProgram>(vertexShader, fragmentShader);
+
+		MeshRenderer meshRenderer(CreateTriangle(), shaderProgram);
 
 		window.Display();
 	}
