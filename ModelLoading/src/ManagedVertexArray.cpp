@@ -6,12 +6,12 @@
 
 ManagedVertexArray::ManagedVertexArray()
 {
-	glCreateBuffers(1, &name);
+	glCreateVertexArrays(1, &name);
 }
 
 ManagedVertexArray::~ManagedVertexArray()
 {
-	glDeleteBuffers(1, &name);
+	glDeleteVertexArrays(1, &name);
 }
 
 ManagedVertexArray::ManagedVertexArray(ManagedVertexArray&& other) noexcept :
@@ -23,7 +23,7 @@ ManagedVertexArray& ManagedVertexArray::operator=(ManagedVertexArray&& other) no
 {
 	if (this != &other)
 	{
-		glDeleteBuffers(1, &name);
+		glDeleteVertexArrays(1, &name);
 		name = std::exchange(other.name, 0);
 	}
 	return *this;
