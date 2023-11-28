@@ -1,6 +1,5 @@
 #pragma once
 
-#include "GLEnums.h"
 #include "Shader.h"
 
 class ShaderProgram

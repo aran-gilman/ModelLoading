@@ -56,9 +56,6 @@
     <ClInclude Include="src\BufferOperations.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\GLEnums.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\Shader.h">
       <Filter>Header Files</Filter>
     </ClInclude>

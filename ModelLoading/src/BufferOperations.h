@@ -4,7 +4,6 @@
 
 #include <GL/glew.h>
 
-#include "GLEnums.h"
 #include "ManagedBuffer.h"
 #include "ManagedVertexArray.h"
 

@@ -1,7 +1,6 @@
 #include "MeshRenderer.h"
 
 #include "BufferOperations.h"
-#include "GLEnums.h"
 
 MeshRenderer::MeshRenderer(const MeshData& meshData)
 {

@@ -150,7 +150,6 @@
   <ItemGroup>
     <ClInclude Include="src\ShaderProgram.h" />
     <ClInclude Include="src\Shader.h" />
-    <ClInclude Include="src\GLEnums.h" />
     <ClInclude Include="src\BufferOperations.h" />
     <ClInclude Include="src\MeshData.h" />
     <ClInclude Include="src\ManagedVertexArray.h" />
