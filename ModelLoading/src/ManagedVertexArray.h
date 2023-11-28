@@ -11,6 +11,9 @@ public:
 	ManagedVertexArray(const ManagedVertexArray&) = delete;
 	ManagedVertexArray& operator=(const ManagedVertexArray&) = delete;
 
+	ManagedVertexArray(ManagedVertexArray&& other) noexcept;
+	ManagedVertexArray& operator=(ManagedVertexArray&& other) noexcept;
+
 private:
 	unsigned int name;
 };
