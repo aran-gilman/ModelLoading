@@ -15,6 +15,9 @@ public:
 
 	void SetMesh(MeshRenderer* meshRenderer);
 
+	Window(const Window&) = delete;
+	Window& operator=(const Window&) = delete;
+
 private:
 	GLFWwindow* glfwWindow;
 	MeshRenderer* renderedMesh;

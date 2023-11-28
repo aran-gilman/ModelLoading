@@ -137,12 +137,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\ManagedVertexArray.cpp" />
     <ClCompile Include="src\ManagedBuffer.cpp" />
     <ClCompile Include="src\MeshRenderer.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Window.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\ManagedVertexArray.h" />
     <ClInclude Include="src\ManagedBuffer.h" />
     <ClInclude Include="src\MeshRenderer.h" />
     <ClInclude Include="src\Window.h" />
