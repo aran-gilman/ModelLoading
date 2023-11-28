@@ -1,7 +1,8 @@
 #include <iostream>
+#include <stdexcept>
 
-#include <GL/glew.h>
-
+#include "GLEnums.h"
+#include "Shader.h"
 #include "Window.h"
 
 const char* vertexShaderSource = R"s(
@@ -10,7 +11,7 @@ layout (location = 0) in vec3 inPos;
 
 void main()
 {
-    gl_Position = vec4(inPos, 1.0);
+    gl_Position = vec4(inPos, 1.0f);
 })s";
 
 const char* fragmentShaderSource = R"s(
@@ -19,20 +20,23 @@ out vec4 FragColor;
 
 void main()
 {
-    FragColor = (0.5f, 0.5f, 0.5f, 1.0f);
+    FragColor = vec4(0.5f, 0.5f, 0.5f, 1.0f);
 })s";
 
-int main(int argc, char* argv[]) {
-	Window window(800, 600, "Model Loading Test");
+int main(int argc, char* argv[])
+{
+	try
+	{
+		Window window(800, 600, "Model Loading Test");
 
-	unsigned int vertexShader = glCreateShader(GL_VERTEX_SHADER);
-	glShaderSource(vertexShader, 1, &vertexShaderSource, nullptr);
-	glCompileShader(vertexShader);
+		Shader<ShaderType::Vertex> vertexShader(vertexShaderSource);
+		Shader<ShaderType::Fragment> fragmentShader(fragmentShaderSource);
 
-	unsigned int fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
-	glShaderSource(fragmentShader, 1, &fragmentShaderSource, nullptr);
-	glCompileShader(fragmentShader);
-
-	window.Display();
+		window.Display();
+	}
+	catch (const std::exception& e)
+	{
+		std::cerr << e.what() << std::endl;
+	}
 	return 0;
 }

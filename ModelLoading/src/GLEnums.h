@@ -1,5 +1,7 @@
 #pragma once
 
+#include <string>
+
 #include <GL/glew.h>
 
 enum class BufferBindingTarget : GLenum
@@ -13,3 +15,12 @@ enum class BufferUsage : GLenum
 {
 	StaticDraw = GL_STATIC_DRAW
 };
+
+enum class ShaderType : GLenum
+{
+	Vertex = GL_VERTEX_SHADER,
+	Fragment = GL_FRAGMENT_SHADER,
+};
+
+
+std::string ToString(ShaderType shaderType);
