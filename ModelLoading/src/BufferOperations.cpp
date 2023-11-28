@@ -19,3 +19,18 @@ void SetVertexArrayElements(const ManagedVertexArray& vao, const ManagedBuffer<B
 {
 	glVertexArrayElementBuffer(vao.Name(), ebo.Name());
 }
+
+void DefineVertexAttribute(
+	const ManagedVertexArray& vao,
+	const ManagedBuffer<BufferBindingTarget::Array>& vbo,
+	int bindingPoint,
+	ComponentCount size,
+	int stride,
+	ptrdiff_t offset)
+{
+	glEnableVertexArrayAttrib(vao.Name(), bindingPoint);
+	glVertexArrayVertexBuffer(vao.Name(), bindingPoint, vbo.Name(), offset, stride);
+	glVertexArrayAttribFormat(
+		vao.Name(), bindingPoint,
+		static_cast<int>(size), GL_FLOAT, GL_FALSE, offset);
+}
