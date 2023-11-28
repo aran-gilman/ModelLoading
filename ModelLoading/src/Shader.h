@@ -6,7 +6,12 @@
 
 #include <GL/glew.h>
 
-#include "GLEnums.h"
+enum class ShaderType : GLenum
+{
+	Vertex = GL_VERTEX_SHADER,
+	Fragment = GL_FRAGMENT_SHADER,
+};
+std::string ToString(ShaderType shaderType);
 
 template <ShaderType Type>
 class Shader

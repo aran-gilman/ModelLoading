@@ -1,4 +1,4 @@
-#include "GLEnums.h"
+#include "Shader.h"
 
 std::string ToString(ShaderType shaderType)
 {
