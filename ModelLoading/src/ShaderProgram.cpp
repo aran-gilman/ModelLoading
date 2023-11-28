@@ -26,3 +26,13 @@ ShaderProgram::~ShaderProgram()
 {
 	glDeleteProgram(name);
 }
+
+void BindShaderProgram(const ShaderProgram& shaderProgram)
+{
+	glUseProgram(shaderProgram.Name());
+}
+
+void UnbindShaderProgram()
+{
+	glUseProgram(0);
+}

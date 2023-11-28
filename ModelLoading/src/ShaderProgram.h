@@ -18,3 +18,5 @@ private:
 	unsigned int name;
 };
 
+void BindShaderProgram(const ShaderProgram& shaderProgram);
+void UnbindShaderProgram();

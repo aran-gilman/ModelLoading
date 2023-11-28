@@ -31,8 +31,7 @@ int main(int argc, char* argv[])
 
 		VertexShader vertexShader(vertexShaderSource);
 		FragmentShader fragmentShader(fragmentShaderSource);
-
-		ShaderProgram(vertexShader, fragmentShader);
+		ShaderProgram shaderProgram(vertexShader, fragmentShader);
 
 		window.Display();
 	}
