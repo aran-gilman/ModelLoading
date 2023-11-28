@@ -51,3 +51,7 @@ public:
 private:
 	unsigned int name;
 };
+
+using ArrayBuffer = ManagedBuffer<BufferBindingTarget::Array>;
+using ElementBuffer = ManagedBuffer<BufferBindingTarget::ElementArray>;
+using UniformBuffer = ManagedBuffer<BufferBindingTarget::Uniform>;
