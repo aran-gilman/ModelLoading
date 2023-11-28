@@ -4,10 +4,12 @@
 
 #include "GLEnums.h"
 
-template <BufferBindingTarget Target>
+template <BufferBindingTarget TTarget>
 class ManagedBuffer
 {
 public:
+	constexpr static BufferBindingTarget Target = TTarget;
+
 	ManagedBuffer()
 	{
 		glCreateBuffers(1, &name);
