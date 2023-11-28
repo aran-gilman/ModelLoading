@@ -3,6 +3,7 @@
 #include <format>
 #include <stdexcept>
 #include <string>
+#include <utility>
 
 #include <GL/glew.h>
 
@@ -43,6 +44,16 @@ public:
 
 	Shader(const Shader&) = delete;
 	Shader& operator=(const Shader&) = delete;
+
+	Shader(Shader&& other) noexcept : name(std::exchange(other.name, 0)) {}
+	Shader& operator=(Shader&& other) noexcept
+	{
+		if (this != &other)
+		{
+			std::swap(name, other.name);
+		}
+		return *this;
+	}
 
 private:
 	unsigned int name;
