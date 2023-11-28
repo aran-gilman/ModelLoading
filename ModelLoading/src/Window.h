@@ -3,6 +3,7 @@
 #include <string>
 
 class GLFWwindow;
+class MeshRenderer;
 
 class Window
 {
@@ -12,7 +13,10 @@ public:
 
 	void Display();
 
+	void SetMesh(MeshRenderer* meshRenderer);
+
 private:
 	GLFWwindow* glfwWindow;
+	MeshRenderer* renderedMesh;
 };
 

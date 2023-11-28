@@ -5,6 +5,8 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 
+#include "MeshRenderer.h"
+
 Window::Window(int width, int height, const std::string& title)
 {
 	glfwInit();
@@ -37,8 +39,18 @@ Window::~Window()
 
 void Window::Display()
 {
-	while (!glfwWindowShouldClose(glfwWindow)) {
+	while (!glfwWindowShouldClose(glfwWindow))
+	{
+		if (renderedMesh != nullptr)
+		{
+			renderedMesh->Render();
+		}
 		glfwSwapBuffers(glfwWindow);
 		glfwPollEvents();
 	}
+}
+
+void Window::SetMesh(MeshRenderer* meshRenderer)
+{
+	renderedMesh = meshRenderer;
 }
