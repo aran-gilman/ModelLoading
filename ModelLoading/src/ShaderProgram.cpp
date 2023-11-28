@@ -37,7 +37,8 @@ ShaderProgram& ShaderProgram::operator=(ShaderProgram&& other) noexcept
 {
 	if (this != &other)
 	{
-		std::swap(name, other.name);
+		glDeleteProgram(name);
+		name = std::exchange(other.name, 0);
 	}
 	return *this;
 }

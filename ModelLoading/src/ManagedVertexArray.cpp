@@ -23,7 +23,8 @@ ManagedVertexArray& ManagedVertexArray::operator=(ManagedVertexArray&& other) no
 {
 	if (this != &other)
 	{
-		std::swap(name, other.name);
+		glDeleteVertexArrays(1, &name);
+		name = std::exchange(other.name, 0);
 	}
 	return *this;
 }

@@ -50,7 +50,8 @@ public:
 	{
 		if (this != &other)
 		{
-			std::swap(name, other.name);
+			glDeleteShader(name);
+			name = std::exchange(other.name, 0);
 		}
 		return *this;
 	}
