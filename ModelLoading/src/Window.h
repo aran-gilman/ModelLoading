@@ -1,5 +1,6 @@
 #pragma once
 
+#include <functional>
 #include <string>
 
 class GLFWwindow;
@@ -13,13 +14,13 @@ public:
 
 	void Display();
 
-	void SetMesh(MeshRenderer* meshRenderer);
+	void SetRenderCallback(std::function<void()> renderCallback);
 
 	Window(const Window&) = delete;
 	Window& operator=(const Window&) = delete;
 
 private:
 	GLFWwindow* glfwWindow;
-	MeshRenderer* renderedMesh;
+	std::function<void()> renderCallback;
 };
 

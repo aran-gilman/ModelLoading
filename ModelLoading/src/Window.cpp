@@ -7,7 +7,13 @@
 
 #include "MeshRenderer.h"
 
-Window::Window(int width, int height, const std::string& title)
+namespace
+{
+	void EmptyRenderCallback() {}
+}
+
+Window::Window(int width, int height, const std::string& title) :
+	renderCallback(EmptyRenderCallback)
 {
 	glfwInit();
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
@@ -43,16 +49,13 @@ void Window::Display()
 	{
 		glClearColor(0.25f, 0.0f, 0.5f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		if (renderedMesh != nullptr)
-		{
-			renderedMesh->Render();
-		}
+		renderCallback();
 		glfwSwapBuffers(glfwWindow);
 		glfwPollEvents();
 	}
 }
 
-void Window::SetMesh(MeshRenderer* meshRenderer)
+void Window::SetRenderCallback(std::function<void()> renderCallback)
 {
-	renderedMesh = meshRenderer;
+	this->renderCallback = renderCallback;
 }
