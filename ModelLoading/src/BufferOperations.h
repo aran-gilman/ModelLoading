@@ -19,6 +19,13 @@ void SetBufferData(const ManagedBuffer<Target>& buffer, const T& data, BufferUsa
 	glNamedBufferData(buffer.Name(), sizeof(data), &data, static_cast<GLenum>(usage));
 }
 
+template <typename T>
+void SetBufferData(const UniformBuffer& buffer, const T& data, BufferUsage usage)
+{
+	static_assert(sizeof(T) % 16 == 0, "Uniform buffer data type size must be a multiple of 16.");
+	glNamedBufferData(buffer.Name(), sizeof(data), &data, static_cast<GLenum>(usage));
+}
+
 template <BufferBindingTarget Target>
 void BindBuffer(const ManagedBuffer<Target>& buffer)
 {
