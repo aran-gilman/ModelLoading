@@ -20,8 +20,8 @@ public:
 	MeshRenderer& operator=(const MeshRenderer&) = delete;
 
 private:
-	ManagedBuffer<BufferBindingTarget::Array> vbo;
-	ManagedBuffer<BufferBindingTarget::ElementArray> ebo;
+	ArrayBuffer vbo;
+	ElementBuffer ebo;
 	ManagedVertexArray vao;
 
 	std::shared_ptr<ShaderProgram> shaderProgram;
