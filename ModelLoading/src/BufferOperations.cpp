@@ -15,6 +15,11 @@ void UnbindVertexArray()
 	glBindVertexArray(0);
 }
 
+void BindUniformBlock(const UniformBuffer& buffer, int bindingPoint)
+{
+	glBindBufferBase(static_cast<GLenum>(buffer.Target), bindingPoint, buffer.Name());
+}
+
 void SetVertexArrayElements(const ManagedVertexArray& vao, const ManagedBuffer<BufferBindingTarget::ElementArray>& ebo)
 {
 	glVertexArrayElementBuffer(vao.Name(), ebo.Name());

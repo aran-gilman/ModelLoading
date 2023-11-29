@@ -24,6 +24,8 @@ void BindVertexArray(const ManagedVertexArray& vao);
 void UnbindBuffer(BufferBindingTarget target);
 void UnbindVertexArray();
 
+void BindUniformBlock(const UniformBuffer& buffer, int bindingPoint);
+
 void SetVertexArrayElements(const ManagedVertexArray& vao, const ManagedBuffer<BufferBindingTarget::ElementArray>& ebo);
 
 enum class ComponentCount : int
