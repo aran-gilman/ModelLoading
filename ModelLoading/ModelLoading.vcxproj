@@ -159,6 +159,7 @@
     <ClInclude Include="src\ManagedBuffer.h" />
     <ClInclude Include="src\MeshRenderer.h" />
     <ClInclude Include="src\Window.h" />
+    <ClInclude Include="src\VectorConstants.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
