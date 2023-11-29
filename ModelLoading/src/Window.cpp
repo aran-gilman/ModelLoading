@@ -36,6 +36,7 @@ Window::Window(int width, int height, const std::string& title) :
 	}
 
 	glViewport(0, 0, width, height);
+	glEnable(GL_DEPTH_TEST);
 }
 
 Window::~Window()
