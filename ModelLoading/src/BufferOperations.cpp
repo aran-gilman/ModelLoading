@@ -37,5 +37,5 @@ void DefineVertexAttribute(
 	glVertexArrayVertexBuffer(vao.Name(), bindingPoint, vbo.Name(), offset, stride);
 	glVertexArrayAttribFormat(
 		vao.Name(), bindingPoint,
-		static_cast<int>(size), GL_FLOAT, GL_FALSE, offset);
+		static_cast<int>(size), GL_FLOAT, GL_FALSE, 0);
 }
