@@ -3,6 +3,7 @@
 #include <memory>
 #include <stdexcept>
 
+#include "Camera.h"
 #include "MeshData.h"
 #include "MeshRenderer.h"
 #include "Shader.h"
@@ -32,6 +33,8 @@ int main(int argc, char* argv[])
 	try
 	{
 		Window window(800, 600, "Model Loading Test");
+
+		Camera camera;
 
 		VertexShader vertexShader(vertexShaderSource);
 		FragmentShader fragmentShader(fragmentShaderSource);
