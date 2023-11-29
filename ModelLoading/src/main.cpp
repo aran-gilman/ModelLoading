@@ -21,7 +21,6 @@ layout (std140, binding = 0) uniform Camera
 {
     mat4 view;
     mat4 projection;
-    vec4 position;
 } camera;
 
 void main()
@@ -50,8 +49,7 @@ int main(int argc, char* argv[])
 
 		Camera camera({
 			glm::lookAt(position, position + front, up),
-			glm::perspective(glm::radians(45.0f), 800.0f / 600, 0.1f, 100.0f),
-			glm::vec4(position, 0.0f)
+			glm::perspective(glm::radians(45.0f), 800.0f / 600, 0.1f, 100.0f)
 		});
 
 		VertexShader vertexShader(vertexShaderSource);
