@@ -44,10 +44,14 @@ int main(int argc, char* argv[])
 	{
 		Window window(800, 600, "Model Loading Test");
 
+		glm::vec3 position = glm::vec3(0.0f, 0.0f, 3.0f);
+		glm::vec3 front = glm::vec3(0.0f, 0.0f, -1.0f);
+		glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f);
+
 		Camera camera({
-			glm::mat4(1.0f),
+			glm::lookAt(position, position + front, up),
 			glm::perspective(glm::radians(45.0f), 800.0f / 600, 0.1f, 100.0f),
-			glm::vec4(0.0f, 0.0f, -1.0f, 0.0f)
+			glm::vec4(position, 0.0f)
 		});
 
 		VertexShader vertexShader(vertexShaderSource);
