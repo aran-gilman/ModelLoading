@@ -17,9 +17,16 @@ const char* vertexShaderSource = R"s(
 #version 460 core
 layout (location = 0) in vec3 inPos;
 
+layout (std140, binding = 0) uniform Camera
+{
+    mat4 view;
+    mat4 projection;
+    vec4 position;
+} camera;
+
 void main()
 {
-    gl_Position = vec4(inPos, 1.0f);
+    gl_Position = camera.projection * camera.view * vec4(inPos, 1.0f);
 })s";
 
 const char* fragmentShaderSource = R"s(
