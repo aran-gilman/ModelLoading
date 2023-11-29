@@ -56,7 +56,7 @@ int main(int argc, char* argv[])
 		FragmentShader fragmentShader(fragmentShaderSource);
 		std::shared_ptr<ShaderProgram> shaderProgram = std::make_shared<ShaderProgram>(vertexShader, fragmentShader);
 
-		MeshRenderer meshRenderer(CreateQuad(), shaderProgram);
+		MeshRenderer meshRenderer(CreateCube(), shaderProgram);
 		window.SetRenderCallback(std::bind_front(&MeshRenderer::Render, &meshRenderer));
 
 		window.Display();

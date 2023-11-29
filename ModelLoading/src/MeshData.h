@@ -18,3 +18,4 @@ struct MeshData
 };
 
 MeshData CreateQuad();
+MeshData CreateCube();

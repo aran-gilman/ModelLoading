@@ -15,3 +15,19 @@ MeshData CreateQuad()
     };
     return mesh;
 }
+
+MeshData CreateCube()
+{
+    MeshData mesh;
+    mesh.vertices = {
+        {{  0.5f,  0.5f, 0.5f }},
+        {{  0.5f, -0.5f, 0.5f }},
+        {{ -0.5f, -0.5f, 0.5f }},
+        {{ -0.5f,  0.5f, 0.5f }},
+    };
+    mesh.indices = {   
+        0, 1, 3,
+        1, 2, 3,
+    };
+    return mesh;
+}
