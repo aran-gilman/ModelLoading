@@ -1,5 +1,7 @@
 #include "MeshData.h"
 
+#include "VectorConstants.h"
+
 MeshData CreateQuad()
 {
     MeshData mesh;
@@ -30,6 +32,8 @@ MeshData CreateQuad()
 */
 MeshData CreateCube()
 {
+    using namespace constants::vec3;
+
     glm::vec3 a{ -0.5f,  0.5f, -0.5f };
     glm::vec3 b{  0.5f,  0.5f, -0.5f };
     glm::vec3 c{ -0.5f, -0.5f, -0.5f };
@@ -43,40 +47,40 @@ MeshData CreateCube()
     MeshData mesh;
     mesh.vertices = {
         // Front
-        {f},
-        {h},
-        {g},
-        {e},
+        {f, Forward},
+        {h, Forward},
+        {g, Forward},
+        {e, Forward},
 
         // Right
-        {b},
-        {d},
-        {h},
-        {f},
+        {b, Right},
+        {d, Right},
+        {h, Right},
+        {f, Right},
 
         // Back
-        {a},
-        {c},
-        {d},
-        {b},
+        {a, Back},
+        {c, Back},
+        {d, Back},
+        {b, Back},
 
         // Left
-        {e},
-        {g},
-        {c},
-        {a},
+        {e, Left},
+        {g, Left},
+        {c, Left},
+        {a, Left},
 
         // Top
-        {b},
-        {f},
-        {e},
-        {a},
+        {b, Up},
+        {f, Up},
+        {e, Up},
+        {a, Up},
 
         // Bottom
-        {h},
-        {d},
-        {c},
-        {g},
+        {h, Down},
+        {d, Down},
+        {c, Down},
+        {g, Down},
     };
 
     mesh.indices = {

@@ -16,6 +16,7 @@
 const char* vertexShaderSource = R"s(
 #version 460 core
 layout (location = 0) in vec3 inPos;
+layout (location = 1) in vec3 inNormal;
 
 layout (std140, binding = 0) uniform Camera
 {
@@ -23,18 +24,23 @@ layout (std140, binding = 0) uniform Camera
     mat4 projection;
 } camera;
 
+out vec3 Normal;
+
 void main()
 {
     gl_Position = camera.projection * camera.view * vec4(inPos, 1.0f);
+    Normal = inNormal;
 })s";
 
 const char* fragmentShaderSource = R"s(
 #version 460 core
 out vec4 FragColor;
 
+in vec3 Normal;
+
 void main()
 {
-    FragColor = vec4(0.5f, 0.5f, 0.5f, 1.0f);
+    FragColor = vec4(abs(Normal), 1.0f);
 })s";
 
 int main(int argc, char* argv[])
