@@ -3,6 +3,9 @@
 #include <memory>
 #include <stdexcept>
 
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+
 #include "Camera.h"
 #include "MeshData.h"
 #include "MeshRenderer.h"
@@ -34,7 +37,11 @@ int main(int argc, char* argv[])
 	{
 		Window window(800, 600, "Model Loading Test");
 
-		Camera camera;
+		Camera camera({
+			glm::mat4(1.0f),
+			glm::perspective(glm::radians(45.0f), 800.0f / 600, 0.1f, 100.0f),
+			glm::vec4(0.0f, 0.0f, -1.0f, 0.0f)
+		});
 
 		VertexShader vertexShader(vertexShaderSource);
 		FragmentShader fragmentShader(fragmentShaderSource);

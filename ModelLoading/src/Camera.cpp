@@ -2,8 +2,9 @@
 
 #include "BufferOperations.h"
 
-Camera::Camera()
+Camera::Camera(CameraData initialCameraConfig) :
+	shaderData(initialCameraConfig)
 {
-	SetBufferData(ubo, CameraData{}, BufferUsage::StaticDraw);
+	SetBufferData(ubo, shaderData, BufferUsage::StaticDraw);
 	BindUniformBlock(ubo, 0);
 }

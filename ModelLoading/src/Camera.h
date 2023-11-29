@@ -6,17 +6,18 @@
 
 struct CameraData
 {
-	glm::vec4 view;
-	glm::vec4 projection;
+	glm::mat4 view;
+	glm::mat4 projection;
 	glm::vec4 position;
 };
 
 class Camera
 {
 public:
-	Camera();
+	Camera(CameraData initialCameraConfig);
 
 private:
 	UniformBuffer ubo;
+	CameraData shaderData;
 };
 
