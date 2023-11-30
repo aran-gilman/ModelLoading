@@ -12,18 +12,26 @@ namespace
 {
 	void EmptyPerFrameCallback(double) {}
 	void EmptyKeyboardCallback(KeyToken, int, KeyAction, int) {}
+	void EmptyScrollCallback(double, double) {}
 
 	void HandleKeyboardInput(GLFWwindow* window, int keyToken, int scancode, int action, int mods)
 	{
 		Window* user = static_cast<Window*>(glfwGetWindowUserPointer(window));
 		user->SendKeyboardEvent(static_cast<KeyToken>(keyToken), scancode, static_cast<KeyAction>(action), mods);
 	}
+
+	void HandleScrollCallback(GLFWwindow* window, double xOffset, double yOffset)
+	{
+		Window* user = static_cast<Window*>(glfwGetWindowUserPointer(window));
+		user->SendScrollEvent(xOffset, yOffset);
+	}
 }
 
 Window::Window(int width, int height, const std::string& title) :
 	renderCallback(EmptyPerFrameCallback),
 	updateCallback(EmptyPerFrameCallback),
-	keyboardCallback(EmptyKeyboardCallback)
+	keyboardCallback(EmptyKeyboardCallback),
+	scrollCallback(EmptyScrollCallback)
 {
 	glfwInit();
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
@@ -89,7 +97,17 @@ void Window::SetKeyboardCallback(std::function<void(KeyToken, int, KeyAction, in
 	this->keyboardCallback = keyboardCallback;
 }
 
+void Window::SetScrollCallback(std::function<void(double, double)> scrollCallback)
+{
+	this->scrollCallback = scrollCallback;
+}
+
 void Window::SendKeyboardEvent(KeyToken keyToken, int scancode, KeyAction action, int mods)
 {
 	keyboardCallback(keyToken, scancode, action, mods);
+}
+
+void Window::SendScrollEvent(double xOffset, double yOffset)
+{
+	scrollCallback(xOffset, yOffset);
 }
