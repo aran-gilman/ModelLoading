@@ -17,4 +17,6 @@ private:
 	Camera* camera;
 	float horizontalRotationSpeed;
 	float horizontalAngle;
+
+	void UpdateCameraPosition();
 };
