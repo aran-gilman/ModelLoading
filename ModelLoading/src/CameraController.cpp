@@ -22,7 +22,9 @@ CameraController::CameraController(Camera* camera) :
 
 	maxVerticalRotationSpeed(180),
 	currentVerticalAngle(0),
-	currentVerticalRotationVelocity(0)
+	currentVerticalRotationVelocity(0),
+
+	cameraDistance(5.0f)
 {
 	UpdateCameraPosition();
 }
@@ -107,9 +109,11 @@ void CameraController::UpdateCameraPosition()
 {
 	float verticalMultiplier = std::cos(glm::radians(currentVerticalAngle));
 
-	float x = verticalMultiplier * std::cos(glm::radians(currentHorizontalAngle)) * 5;
-	float y = std::sin(glm::radians(currentVerticalAngle)) * 5;
-	float z = verticalMultiplier * std::sin(glm::radians(currentHorizontalAngle)) * 5;
+	float x = verticalMultiplier * std::cos(glm::radians(currentHorizontalAngle));
+	float y = std::sin(glm::radians(currentVerticalAngle));
+	float z = verticalMultiplier * std::sin(glm::radians(currentHorizontalAngle));
 
-	camera->SetPosition({ x, y, z});
+	glm::vec3 newPosition{ x, y, z };
+
+	camera->SetPosition(newPosition * cameraDistance);
 }

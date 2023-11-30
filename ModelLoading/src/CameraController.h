@@ -25,5 +25,7 @@ private:
 	float currentVerticalAngle;
 	float currentVerticalRotationVelocity;
 
+	float cameraDistance;
+
 	void UpdateCameraPosition();
 };
