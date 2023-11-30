@@ -5,7 +5,7 @@
 
 #include "Input.h"
 
-class GLFWwindow;
+struct GLFWwindow;
 
 class Window
 {
