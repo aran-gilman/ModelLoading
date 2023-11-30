@@ -1,5 +1,6 @@
 #include "CameraController.h"
 
+#include <format>
 #include <iostream>
 #include <cmath>
 
@@ -8,7 +9,7 @@
 CameraController::CameraController(Camera* camera) :
 	camera(camera),
 	horizontalAngle(0),
-	horizontalRotationSpeed(0.05)
+	horizontalRotationSpeed(5)
 {
 	UpdateCameraPosition();
 }
@@ -38,9 +39,9 @@ void CameraController::UpdateCameraPosition()
 		horizontalAngle = 360.0f + horizontalAngle;
 	}
 
-	float x = std::cos(horizontalAngle) * 5;
+	float x = std::cos(glm::radians(horizontalAngle)) * 5;
 	float y = 0.0f;
-	float z = std::sin(horizontalAngle) * 5;
+	float z = std::sin(glm::radians(horizontalAngle)) * 5;
 
 	camera->SetPosition({ x, y, z});
 }
