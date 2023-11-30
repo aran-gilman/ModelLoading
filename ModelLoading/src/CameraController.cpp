@@ -24,7 +24,11 @@ CameraController::CameraController(Camera* camera) :
 	currentVerticalAngle(0),
 	currentVerticalRotationVelocity(0),
 
-	cameraDistance(5.0f)
+	currentCameraDistance(5.0f),
+	minCameraDistance(1.0f),
+	maxCameraDistance(10.0f),
+	remainingDistanceChange(0.0f),
+	maxDistanceChangeSpeed(5.0f)
 {
 	UpdateCameraPosition();
 }
@@ -73,7 +77,7 @@ void CameraController::HandleKeyboardInput(KeyToken keyToken, int scancode, KeyA
 
 void CameraController::HandleScrollInput(double xOffset, double yOffset)
 {
-	std::cout << std::format("Scrolled: ({}, {})", xOffset, yOffset) << std::endl;
+	remainingDistanceChange -= yOffset;
 }
 
 void CameraController::Update(double elapsedTime)
@@ -104,6 +108,47 @@ void CameraController::Update(double elapsedTime)
 		wasPositionUpdated = true;
 	}
 
+	if (remainingDistanceChange > MinUpdateSpeed)
+	{
+		float diff = maxDistanceChangeSpeed * elapsedTime;
+		float newRemainingDistance = remainingDistanceChange - diff;
+		if (newRemainingDistance - diff < 0.0f)
+		{
+			diff = remainingDistanceChange;
+			remainingDistanceChange = 0;
+		}
+		else
+		{
+			remainingDistanceChange = newRemainingDistance;
+		}
+		currentCameraDistance += diff;
+		if (currentCameraDistance > maxCameraDistance)
+		{
+			currentCameraDistance = maxCameraDistance;
+		}
+		wasPositionUpdated = true;
+	}
+	else if (remainingDistanceChange < -MinUpdateSpeed)
+	{
+		float diff = -maxDistanceChangeSpeed * elapsedTime;
+		float newRemainingDistance = remainingDistanceChange - diff;
+		if (newRemainingDistance - diff > 0.0f)
+		{
+			diff = remainingDistanceChange;
+			remainingDistanceChange = 0;
+		}
+		else
+		{
+			remainingDistanceChange = newRemainingDistance;
+		}
+		currentCameraDistance += diff;
+		if (currentCameraDistance < minCameraDistance)
+		{
+			currentCameraDistance = minCameraDistance;
+		}
+		wasPositionUpdated = true;
+	}
+
 	if (wasPositionUpdated)
 	{
 		UpdateCameraPosition();
@@ -120,5 +165,5 @@ void CameraController::UpdateCameraPosition()
 
 	glm::vec3 newPosition{ x, y, z };
 
-	camera->SetPosition(newPosition * cameraDistance);
+	camera->SetPosition(newPosition * currentCameraDistance);
 }

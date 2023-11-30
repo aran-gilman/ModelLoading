@@ -27,7 +27,11 @@ private:
 	float currentVerticalAngle;
 	float currentVerticalRotationVelocity;
 
-	float cameraDistance;
+	float currentCameraDistance;
+	float minCameraDistance;
+	float maxCameraDistance;
+	float remainingDistanceChange;
+	float maxDistanceChangeSpeed;
 
 	void UpdateCameraPosition();
 };
