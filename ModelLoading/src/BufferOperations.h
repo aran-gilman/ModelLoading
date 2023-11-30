@@ -26,6 +26,14 @@ void SetBufferData(const UniformBuffer& buffer, const T& data, BufferUsage usage
 	glNamedBufferData(buffer.Name(), sizeof(data), &data, static_cast<GLenum>(usage));
 }
 
+// Unlike SetBuffer(), we do want to support non-16-aligned types for uniform
+// buffers when updating the buffer, so no specialization is needed.
+template <BufferBindingTarget Target, typename T>
+void UpdateBufferData(const ManagedBuffer<Target>& buffer, const T& data, ptrdiff_t offset = 0)
+{
+	glNamedBufferSubData(buffer.Name(), offset, sizeof(T), &data);
+}
+
 template <BufferBindingTarget Target>
 void BindBuffer(const ManagedBuffer<Target>& buffer)
 {
