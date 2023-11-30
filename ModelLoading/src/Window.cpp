@@ -20,7 +20,7 @@ namespace
 		user->SendKeyboardEvent(static_cast<KeyToken>(keyToken), scancode, static_cast<KeyAction>(action), mods);
 	}
 
-	void HandleScrollCallback(GLFWwindow* window, double xOffset, double yOffset)
+	void HandleScrollInput(GLFWwindow* window, double xOffset, double yOffset)
 	{
 		Window* user = static_cast<Window*>(glfwGetWindowUserPointer(window));
 		user->SendScrollEvent(xOffset, yOffset);
@@ -48,6 +48,7 @@ Window::Window(int width, int height, const std::string& title) :
 	glfwMakeContextCurrent(glfwWindow);
 	glfwSetWindowUserPointer(glfwWindow, this);
 	glfwSetKeyCallback(glfwWindow, HandleKeyboardInput);
+	glfwSetScrollCallback(glfwWindow, HandleScrollInput);
 
 	GLenum error = glewInit();
 	if (error != GLEW_OK)
