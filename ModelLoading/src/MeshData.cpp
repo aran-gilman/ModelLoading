@@ -110,3 +110,8 @@ MeshData CreateCube()
     };
     return mesh;
 }
+
+MeshData LoadModel(const std::string& path)
+{
+    return MeshData();
+}

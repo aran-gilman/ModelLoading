@@ -1,5 +1,6 @@
 #pragma once
 
+#include <string>
 #include <vector>
 
 #include <glm/glm.hpp>
@@ -19,3 +20,5 @@ struct MeshData
 
 MeshData CreateQuad();
 MeshData CreateCube();
+
+MeshData LoadModel(const std::string& path);
