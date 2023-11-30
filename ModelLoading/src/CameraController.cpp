@@ -8,40 +8,59 @@
 
 CameraController::CameraController(Camera* camera) :
 	camera(camera),
-	horizontalAngle(0),
-	horizontalRotationSpeed(5)
+	currentHorizontalAngle(0),
+	maxHorizontalRotationSpeed(180),
+	currentHorizontalRotationVelocity(0)
 {
 	UpdateCameraPosition();
 }
 
 void CameraController::HandlePlayerInput(KeyToken keyToken, int scancode, KeyAction action, int mods)
 {
-	if (action == KeyAction::Press || action == KeyAction::Repeat)
+	if (action == KeyAction::Press)
 	{
 		if (keyToken == KeyToken::A)
 		{
-			horizontalAngle += horizontalRotationSpeed;
-			UpdateCameraPosition();
+			currentHorizontalRotationVelocity += maxHorizontalRotationSpeed;
 		}
 		else if (keyToken == KeyToken::D)
 		{
-			horizontalAngle -= horizontalRotationSpeed;
-			UpdateCameraPosition();
+			currentHorizontalRotationVelocity -= maxHorizontalRotationSpeed;
 		}
+	}
+	else if (action == KeyAction::Release)
+	{
+		if (keyToken == KeyToken::A)
+		{
+			currentHorizontalRotationVelocity -= maxHorizontalRotationSpeed;
+		}
+		else if (keyToken == KeyToken::D)
+		{
+			currentHorizontalRotationVelocity += maxHorizontalRotationSpeed;
+		}
+	}
+}
+
+void CameraController::Update(double elapsedTime)
+{
+	if (std::abs(currentHorizontalRotationVelocity) > 0.0001f)
+	{
+		currentHorizontalAngle += (currentHorizontalRotationVelocity * elapsedTime);
+		UpdateCameraPosition();
 	}
 }
 
 void CameraController::UpdateCameraPosition()
 {
-	horizontalAngle = std::fmod(horizontalAngle, 360.0f);
-	if (horizontalAngle < 0)
+	currentHorizontalAngle = std::fmod(currentHorizontalAngle, 360.0f);
+	if (currentHorizontalAngle < 0)
 	{
-		horizontalAngle = 360.0f + horizontalAngle;
+		currentHorizontalAngle = 360.0f + currentHorizontalAngle;
 	}
 
-	float x = std::cos(glm::radians(horizontalAngle)) * 5;
+	float x = std::cos(glm::radians(currentHorizontalAngle)) * 5;
 	float y = 0.0f;
-	float z = std::sin(glm::radians(horizontalAngle)) * 5;
+	float z = std::sin(glm::radians(currentHorizontalAngle)) * 5;
 
 	camera->SetPosition({ x, y, z});
 }

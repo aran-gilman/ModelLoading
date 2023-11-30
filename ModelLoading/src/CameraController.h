@@ -12,11 +12,13 @@ public:
 	CameraController(Camera* camera);
 
 	void HandlePlayerInput(KeyToken keyToken, int scancode, KeyAction action, int mods);
+	void Update(double elapsedTime);
 
 private:
 	Camera* camera;
-	float horizontalRotationSpeed;
-	float horizontalAngle;
+	float maxHorizontalRotationSpeed;
+	float currentHorizontalAngle;
+	float currentHorizontalRotationVelocity;
 
 	void UpdateCameraPosition();
 };
