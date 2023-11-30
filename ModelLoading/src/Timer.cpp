@@ -8,12 +8,10 @@ Timer::Timer() :
 {
 }
 
-TimeInSeconds Timer::GetElapsedTime() const
+TimeInSeconds Timer::GetElapsedTime()
 {
-	return glfwGetTime() - startTime;
-}
-
-void Timer::Reset()
-{
-	startTime = 0.0f;
+	TimeInSeconds currentTime = glfwGetTime();
+	TimeInSeconds diff = currentTime - startTime;
+	startTime = currentTime;
+	return diff;
 }

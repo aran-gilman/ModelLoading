@@ -6,9 +6,7 @@ class Timer
 {
 public:
 	Timer();
-
-	TimeInSeconds GetElapsedTime() const;
-	void Reset();
+	TimeInSeconds GetElapsedTime();
 
 private:
 	TimeInSeconds startTime;
