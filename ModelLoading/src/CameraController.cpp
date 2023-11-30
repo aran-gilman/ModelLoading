@@ -6,11 +6,21 @@
 
 #include "Camera.h"
 
+namespace
+{
+	constexpr float MaxVerticalAngle = 90.0f;
+}
+
 CameraController::CameraController(Camera* camera) :
 	camera(camera),
-	currentHorizontalAngle(0),
+
 	maxHorizontalRotationSpeed(180),
-	currentHorizontalRotationVelocity(0)
+	currentHorizontalAngle(0),
+	currentHorizontalRotationVelocity(0),
+
+	maxVerticalRotationSpeed(180),
+	currentVerticalAngle(0),
+	currentVerticalRotationVelocity(0)
 {
 	UpdateCameraPosition();
 }
@@ -27,6 +37,14 @@ void CameraController::HandlePlayerInput(KeyToken keyToken, int scancode, KeyAct
 		{
 			currentHorizontalRotationVelocity -= maxHorizontalRotationSpeed;
 		}
+		else if (keyToken == KeyToken::S)
+		{
+			currentVerticalRotationVelocity -= maxVerticalRotationSpeed;
+		}
+		else if (keyToken == KeyToken::W)
+		{
+			currentVerticalRotationVelocity += maxVerticalRotationSpeed;
+		}
 	}
 	else if (action == KeyAction::Release)
 	{
@@ -38,29 +56,58 @@ void CameraController::HandlePlayerInput(KeyToken keyToken, int scancode, KeyAct
 		{
 			currentHorizontalRotationVelocity += maxHorizontalRotationSpeed;
 		}
+		else if (keyToken == KeyToken::S)
+		{
+			currentVerticalRotationVelocity += maxVerticalRotationSpeed;
+		}
+		else if (keyToken == KeyToken::W)
+		{
+			currentVerticalRotationVelocity -= maxVerticalRotationSpeed;
+		}
 	}
 }
 
 void CameraController::Update(double elapsedTime)
 {
+	bool wasPositionUpdated = false;
 	if (std::abs(currentHorizontalRotationVelocity) > 0.0001f)
 	{
 		currentHorizontalAngle += (currentHorizontalRotationVelocity * elapsedTime);
+		currentHorizontalAngle = std::fmod(currentHorizontalAngle, 360.0f);
+		if (currentHorizontalAngle < 0)
+		{
+			currentHorizontalAngle += 360.0f;
+		}
+		wasPositionUpdated = true;
+	}
+	
+	if (std::abs(currentVerticalRotationVelocity) > 0.0001f)
+	{
+		currentVerticalAngle += (currentVerticalRotationVelocity * elapsedTime);
+		if (currentVerticalAngle > MaxVerticalAngle)
+		{
+			currentVerticalAngle = MaxVerticalAngle;
+		}
+		else if (currentVerticalAngle < -MaxVerticalAngle)
+		{
+			currentVerticalAngle = -MaxVerticalAngle;
+		}
+		wasPositionUpdated = true;
+	}
+
+	if (wasPositionUpdated)
+	{
 		UpdateCameraPosition();
 	}
 }
 
 void CameraController::UpdateCameraPosition()
 {
-	currentHorizontalAngle = std::fmod(currentHorizontalAngle, 360.0f);
-	if (currentHorizontalAngle < 0)
-	{
-		currentHorizontalAngle = 360.0f + currentHorizontalAngle;
-	}
+	float verticalMultiplier = std::cos(glm::radians(currentVerticalAngle));
 
-	float x = std::cos(glm::radians(currentHorizontalAngle)) * 5;
-	float y = 0.0f;
-	float z = std::sin(glm::radians(currentHorizontalAngle)) * 5;
+	float x = verticalMultiplier * std::cos(glm::radians(currentHorizontalAngle)) * 5;
+	float y = std::sin(glm::radians(currentVerticalAngle)) * 5;
+	float z = verticalMultiplier * std::sin(glm::radians(currentHorizontalAngle)) * 5;
 
 	camera->SetPosition({ x, y, z});
 }

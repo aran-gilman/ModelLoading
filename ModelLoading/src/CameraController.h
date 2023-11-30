@@ -16,9 +16,14 @@ public:
 
 private:
 	Camera* camera;
+
 	float maxHorizontalRotationSpeed;
 	float currentHorizontalAngle;
 	float currentHorizontalRotationVelocity;
+
+	float maxVerticalRotationSpeed;
+	float currentVerticalAngle;
+	float currentVerticalRotationVelocity;
 
 	void UpdateCameraPosition();
 };
