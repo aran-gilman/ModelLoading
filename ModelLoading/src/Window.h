@@ -3,7 +3,7 @@
 #include <functional>
 #include <string>
 
-#include "Input.h"
+#include "InputEnums.h"
 
 struct GLFWwindow;
 
