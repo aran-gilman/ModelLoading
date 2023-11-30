@@ -8,7 +8,9 @@
 
 namespace
 {
+	constexpr float MaxHorizontalAngle = 360.0f;
 	constexpr float MaxVerticalAngle = 90.0f;
+	constexpr float MinUpdateSpeed = 0.001f;
 }
 
 CameraController::CameraController(Camera* camera) :
@@ -70,18 +72,18 @@ void CameraController::HandlePlayerInput(KeyToken keyToken, int scancode, KeyAct
 void CameraController::Update(double elapsedTime)
 {
 	bool wasPositionUpdated = false;
-	if (std::abs(currentHorizontalRotationVelocity) > 0.0001f)
+	if (std::abs(currentHorizontalRotationVelocity) > MinUpdateSpeed)
 	{
 		currentHorizontalAngle += (currentHorizontalRotationVelocity * elapsedTime);
-		currentHorizontalAngle = std::fmod(currentHorizontalAngle, 360.0f);
+		currentHorizontalAngle = std::fmod(currentHorizontalAngle, MaxHorizontalAngle);
 		if (currentHorizontalAngle < 0)
 		{
-			currentHorizontalAngle += 360.0f;
+			currentHorizontalAngle += MaxHorizontalAngle;
 		}
 		wasPositionUpdated = true;
 	}
 	
-	if (std::abs(currentVerticalRotationVelocity) > 0.0001f)
+	if (std::abs(currentVerticalRotationVelocity) > MinUpdateSpeed)
 	{
 		currentVerticalAngle += (currentVerticalRotationVelocity * elapsedTime);
 		if (currentVerticalAngle > MaxVerticalAngle)
