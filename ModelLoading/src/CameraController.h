@@ -15,4 +15,6 @@ public:
 
 private:
 	Camera* camera;
+	float horizontalRotationSpeed;
+	float horizontalAngle;
 };
