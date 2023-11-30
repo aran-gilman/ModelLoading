@@ -59,7 +59,7 @@ int main(int argc, char* argv[])
 		MeshRenderer meshRenderer(CreateCube(), shaderProgram);
 		window.SetRenderCallback(std::bind_front(&MeshRenderer::Render, &meshRenderer));
 		window.SetUpdateCallback(std::bind_front(&CameraController::Update, &cameraController));
-		window.SetKeyboardCallback(std::bind_front(&CameraController::HandlePlayerInput, &cameraController));
+		window.SetKeyboardCallback(std::bind_front(&CameraController::HandleKeyboardInput, &cameraController));
 
 		window.Display();
 	}

@@ -29,7 +29,7 @@ CameraController::CameraController(Camera* camera) :
 	UpdateCameraPosition();
 }
 
-void CameraController::HandlePlayerInput(KeyToken keyToken, int scancode, KeyAction action, int mods)
+void CameraController::HandleKeyboardInput(KeyToken keyToken, int scancode, KeyAction action, int mods)
 {
 	if (action == KeyAction::Press)
 	{

@@ -11,7 +11,7 @@ class CameraController
 public:
 	CameraController(Camera* camera);
 
-	void HandlePlayerInput(KeyToken keyToken, int scancode, KeyAction action, int mods);
+	void HandleKeyboardInput(KeyToken keyToken, int scancode, KeyAction action, int mods);
 	void Update(double elapsedTime);
 
 private:
