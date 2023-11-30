@@ -10,7 +10,7 @@
 
 namespace
 {
-	void EmptyRenderCallback(double) {}
+	void EmptyPerFrameCallback(double) {}
 	void EmptyKeyboardCallback(KeyToken, int, KeyAction, int) {}
 
 	void HandleKeyboardInput(GLFWwindow* window, int keyToken, int scancode, int action, int mods)
@@ -21,7 +21,8 @@ namespace
 }
 
 Window::Window(int width, int height, const std::string& title) :
-	renderCallback(EmptyRenderCallback),
+	renderCallback(EmptyPerFrameCallback),
+	updateCallback(EmptyPerFrameCallback),
 	keyboardCallback(EmptyKeyboardCallback)
 {
 	glfwInit();
@@ -61,11 +62,14 @@ void Window::Display()
 	Timer timer;
 	while (!glfwWindowShouldClose(glfwWindow))
 	{
+		double diff = timer.GetElapsedTime();
+		updateCallback(diff);
+
 		glClearColor(0.25f, 0.0f, 0.5f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		double diff = timer.GetElapsedTime();
 		renderCallback(diff);
 		glfwSwapBuffers(glfwWindow);
+
 		glfwPollEvents();
 	}
 }
@@ -73,6 +77,11 @@ void Window::Display()
 void Window::SetRenderCallback(std::function<void(double)> renderCallback)
 {
 	this->renderCallback = renderCallback;
+}
+
+void Window::SetUpdateCallback(std::function<void(double)> updateCallback)
+{
+	this->updateCallback = updateCallback;
 }
 
 void Window::SetKeyboardCallback(std::function<void(KeyToken, int, KeyAction, int)> keyboardCallback)

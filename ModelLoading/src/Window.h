@@ -16,6 +16,7 @@ public:
 	void Display();
 
 	void SetRenderCallback(std::function<void(double)> renderCallback);
+	void SetUpdateCallback(std::function<void(double)> updateCallback);
 	void SetKeyboardCallback(std::function<void(KeyToken, int, KeyAction, int)> keyboardCallback);
 
 	void SendKeyboardEvent(KeyToken keyToken, int scancode, KeyAction action, int mods);
@@ -26,6 +27,7 @@ public:
 private:
 	GLFWwindow* glfwWindow;
 	std::function<void(double)> renderCallback;
+	std::function<void(double)> updateCallback;
 	std::function<void(KeyToken, int, KeyAction, int)> keyboardCallback;
 };
 
