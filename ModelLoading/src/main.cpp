@@ -7,6 +7,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 
 #include "Camera.h"
+#include "CameraController.h"
 #include "MeshData.h"
 #include "MeshRenderer.h"
 #include "Shader.h"
@@ -57,6 +58,8 @@ int main(int argc, char* argv[])
 			glm::lookAt(position, position + front, up),
 			glm::perspective(glm::radians(45.0f), 800.0f / 600, 0.1f, 100.0f)
 		});
+
+		CameraController cameraController(&camera);
 
 		VertexShader vertexShader(vertexShaderSource);
 		FragmentShader fragmentShader(fragmentShaderSource);
