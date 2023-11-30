@@ -13,7 +13,10 @@ private:
 	UniformBuffer ubo;
 
 	glm::vec3 position;
+
 	float aspectRatio;
 	float fieldOfView;
+	float zNear;
+	float zFar;
 };
 
