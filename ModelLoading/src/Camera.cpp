@@ -29,3 +29,10 @@ Camera::Camera(glm::vec3 position, float aspectRatio, float fieldOfView) :
 	SetBufferData(ubo, shaderData, BufferUsage::StaticDraw);
 	BindUniformBlock(ubo, 0);
 }
+
+void Camera::SetPosition(glm::vec3 position)
+{
+	this->position = position;
+	glm::mat4 view = glm::lookAt(position, constants::vec3::Zero, constants::vec3::Up);
+	UpdateBufferData(ubo, view, offsetof(CameraData, view));
+}

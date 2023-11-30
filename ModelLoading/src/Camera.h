@@ -9,6 +9,8 @@ class Camera
 public:
 	Camera(glm::vec3 position, float aspectRatio, float fieldOfView);
 
+	void SetPosition(glm::vec3 position);
+
 private:
 	UniformBuffer ubo;
 
