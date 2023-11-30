@@ -60,6 +60,7 @@ int main(int argc, char* argv[])
 		window.SetRenderCallback(std::bind_front(&MeshRenderer::Render, &meshRenderer));
 		window.SetUpdateCallback(std::bind_front(&CameraController::Update, &cameraController));
 		window.SetKeyboardCallback(std::bind_front(&CameraController::HandleKeyboardInput, &cameraController));
+		window.SetScrollCallback(std::bind_front(&CameraController::HandleScrollInput, cameraController));
 
 		window.Display();
 	}

@@ -71,6 +71,11 @@ void CameraController::HandleKeyboardInput(KeyToken keyToken, int scancode, KeyA
 	}
 }
 
+void CameraController::HandleScrollInput(double xOffset, double yOffset)
+{
+	std::cout << std::format("Scrolled: ({}, {})", xOffset, yOffset) << std::endl;
+}
+
 void CameraController::Update(double elapsedTime)
 {
 	bool wasPositionUpdated = false;
