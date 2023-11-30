@@ -4,19 +4,16 @@
 
 #include "ManagedBuffer.h"
 
-struct CameraData
-{
-	glm::mat4 view;
-	glm::mat4 projection;
-};
-
 class Camera
 {
 public:
-	Camera(CameraData initialCameraConfig);
+	Camera(glm::vec3 position, float aspectRatio, float fieldOfView);
 
 private:
 	UniformBuffer ubo;
-	CameraData shaderData;
+
+	glm::vec3 position;
+	float aspectRatio;
+	float fieldOfView;
 };
 
