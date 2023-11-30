@@ -16,9 +16,9 @@ public:
 	void Display();
 
 	void SetRenderCallback(std::function<void()> renderCallback);
-	void SetKeyboardCallback(std::function<void(int, int, KeyAction, int)> keyboardCallback);
+	void SetKeyboardCallback(std::function<void(KeyToken, int, KeyAction, int)> keyboardCallback);
 
-	void SendKeyboardEvent(int keyToken, int scancode, KeyAction action, int mods);
+	void SendKeyboardEvent(KeyToken keyToken, int scancode, KeyAction action, int mods);
 
 	Window(const Window&) = delete;
 	Window& operator=(const Window&) = delete;
@@ -26,6 +26,6 @@ public:
 private:
 	GLFWwindow* glfwWindow;
 	std::function<void()> renderCallback;
-	std::function<void(int, int, KeyAction, int)> keyboardCallback;
+	std::function<void(KeyToken, int, KeyAction, int)> keyboardCallback;
 };
 
