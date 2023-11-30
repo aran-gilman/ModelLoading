@@ -2,6 +2,8 @@
 
 #include <memory>
 
+#include "Input.h"
+
 class Camera;
 
 class CameraController
@@ -9,7 +11,7 @@ class CameraController
 public:
 	CameraController(Camera* camera);
 
-	void HandlePlayerInput(int keyToken, int scancode, int action, int mods);
+	void HandlePlayerInput(int keyToken, int scancode, KeyAction action, int mods);
 
 private:
 	Camera* camera;

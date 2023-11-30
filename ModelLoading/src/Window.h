@@ -3,6 +3,8 @@
 #include <functional>
 #include <string>
 
+#include "Input.h"
+
 class GLFWwindow;
 
 class Window
@@ -14,9 +16,9 @@ public:
 	void Display();
 
 	void SetRenderCallback(std::function<void()> renderCallback);
-	void SetKeyboardCallback(std::function<void(int, int, int, int)> keyboardCallback);
+	void SetKeyboardCallback(std::function<void(int, int, KeyAction, int)> keyboardCallback);
 
-	void SendKeyboardEvent(int keyToken, int scancode, int action, int mods);
+	void SendKeyboardEvent(int keyToken, int scancode, KeyAction action, int mods);
 
 	Window(const Window&) = delete;
 	Window& operator=(const Window&) = delete;
@@ -24,6 +26,6 @@ public:
 private:
 	GLFWwindow* glfwWindow;
 	std::function<void()> renderCallback;
-	std::function<void(int, int, int, int)> keyboardCallback;
+	std::function<void(int, int, KeyAction, int)> keyboardCallback;
 };
 

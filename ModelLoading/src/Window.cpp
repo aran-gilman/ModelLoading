@@ -10,12 +10,12 @@
 namespace
 {
 	void EmptyRenderCallback() {}
-	void EmptyKeyboardCallback(int, int, int, int) {}
+	void EmptyKeyboardCallback(int, int, KeyAction, int) {}
 
 	void HandleKeyboardInput(GLFWwindow* window, int keyToken, int scancode, int action, int mods)
 	{
 		Window* user = static_cast<Window*>(glfwGetWindowUserPointer(window));
-		user->SendKeyboardEvent(keyToken, scancode, action, mods);
+		user->SendKeyboardEvent(keyToken, scancode, static_cast<KeyAction>(action), mods);
 	}
 }
 
@@ -72,12 +72,12 @@ void Window::SetRenderCallback(std::function<void()> renderCallback)
 	this->renderCallback = renderCallback;
 }
 
-void Window::SetKeyboardCallback(std::function<void(int, int, int, int)> keyboardCallback)
+void Window::SetKeyboardCallback(std::function<void(int, int, KeyAction, int)> keyboardCallback)
 {
 	this->keyboardCallback = keyboardCallback;
 }
 
-void Window::SendKeyboardEvent(int keyToken, int scancode, int action, int mods)
+void Window::SendKeyboardEvent(int keyToken, int scancode, KeyAction action, int mods)
 {
 	keyboardCallback(keyToken, scancode, action, mods);
 }

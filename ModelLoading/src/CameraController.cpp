@@ -7,7 +7,7 @@ CameraController::CameraController(Camera* camera) :
 {
 }
 
-void CameraController::HandlePlayerInput(int keyToken, int scancode, int action, int mods)
+void CameraController::HandlePlayerInput(int keyToken, int scancode, KeyAction action, int mods)
 {
 	std::cout << "Received event with key token " << keyToken << std::endl;
 }
