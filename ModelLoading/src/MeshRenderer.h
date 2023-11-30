@@ -14,7 +14,7 @@ class MeshRenderer
 public:
 	MeshRenderer(const MeshData& meshData, std::shared_ptr<ShaderProgram> shaderProgram);
 
-	void Render() const;
+	void Render(double elapsedTime) const;
 
 	MeshRenderer(const MeshRenderer&) = delete;
 	MeshRenderer& operator=(const MeshRenderer&) = delete;

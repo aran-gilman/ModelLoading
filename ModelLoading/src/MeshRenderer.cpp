@@ -32,7 +32,7 @@ MeshRenderer::MeshRenderer(const MeshData& meshData, std::shared_ptr<ShaderProgr
 	drawCount = meshData.indices.size();
 }
 
-void MeshRenderer::Render() const
+void MeshRenderer::Render(double elapsedTime) const
 {
 	BindShaderProgram(*shaderProgram);
 	BindVertexArray(vao);

@@ -6,10 +6,11 @@
 #include <GLFW/glfw3.h>
 
 #include "MeshRenderer.h"
+#include "Timer.h"
 
 namespace
 {
-	void EmptyRenderCallback() {}
+	void EmptyRenderCallback(double) {}
 	void EmptyKeyboardCallback(KeyToken, int, KeyAction, int) {}
 
 	void HandleKeyboardInput(GLFWwindow* window, int keyToken, int scancode, int action, int mods)
@@ -57,17 +58,19 @@ Window::~Window()
 
 void Window::Display()
 {
+	Timer timer;
 	while (!glfwWindowShouldClose(glfwWindow))
 	{
 		glClearColor(0.25f, 0.0f, 0.5f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		renderCallback();
+		double diff = timer.GetElapsedTime();
+		renderCallback(diff);
 		glfwSwapBuffers(glfwWindow);
 		glfwPollEvents();
 	}
 }
 
-void Window::SetRenderCallback(std::function<void()> renderCallback)
+void Window::SetRenderCallback(std::function<void(double)> renderCallback)
 {
 	this->renderCallback = renderCallback;
 }
