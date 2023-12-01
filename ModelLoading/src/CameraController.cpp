@@ -9,7 +9,7 @@
 namespace
 {
 	constexpr float MaxHorizontalAngle = 360.0f;
-	constexpr float MaxVerticalAngle = 90.0f;
+	constexpr float MaxVerticalAngle = 89.0f;
 	constexpr float MinUpdateSpeed = 0.001f;
 }
 
