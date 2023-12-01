@@ -27,7 +27,7 @@ public:
 		FragmentShader fragmentShader(ReadTextFile("resources/shaders/normalColor.frag"));
 		std::shared_ptr<Material> material = std::make_shared<Material>(ShaderProgram(vertexShader, fragmentShader));
 
-		AddModel(LoadModel("resources/models/bookA.fbx"), material);
+		AddModel(LoadModel("resources/models/backpack.obj"), material);
 
 		window->SetRenderCallback(std::bind_front(&Scene::Render, this));
 		window->SetUpdateCallback(std::bind_front(&CameraController::Update, &cameraController));
