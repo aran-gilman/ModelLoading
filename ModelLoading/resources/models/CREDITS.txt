@@ -1,0 +1,4 @@
+Asset: bookA.fbx
+Author: Kay Lousberg
+License: CC0
+Link: https://kaylousberg.itch.io/kaykit-dungeon-remastered
