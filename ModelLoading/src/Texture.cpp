@@ -22,6 +22,7 @@ Texture::Texture(const TextureData& textureData)
 		textureData.width, textureData.height,
 		colorFormat, GL_UNSIGNED_BYTE,
 		textureData.data);
+	glGenerateTextureMipmap(name);
 }
 
 Texture::~Texture()
