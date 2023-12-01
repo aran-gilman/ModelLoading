@@ -21,4 +21,10 @@ struct MeshData
 MeshData CreateQuad();
 MeshData CreateCube();
 
-MeshData LoadModel(const std::string& path);
+struct Model
+{
+	MeshData meshData;
+	std::vector<Model> children;
+};
+
+Model LoadModel(const std::string& path);

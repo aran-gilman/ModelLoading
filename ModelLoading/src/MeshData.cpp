@@ -118,13 +118,16 @@ MeshData CreateCube()
     return mesh;
 }
 
-MeshData LoadModel(const std::string& path)
+Model LoadModel(const std::string& path)
 {
     Assimp::Importer importer;
-    const aiScene* scene = importer.ReadFile(path, aiProcess_Triangulate | aiProcess_FlipUVs);
+    const aiScene* scene = importer.ReadFile(
+        path,
+        aiProcess_Triangulate | aiProcess_FlipUVs | aiProcess_GenNormals);
     if (scene == nullptr || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || scene->mRootNode == nullptr)
     {
         throw std::runtime_error(std::format("Failed to load model: {}", importer.GetErrorString()));
     }
-    return MeshData();
+    Model model;
+    return model;
 }
