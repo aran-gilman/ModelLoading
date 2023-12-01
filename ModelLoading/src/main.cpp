@@ -8,6 +8,7 @@
 #include "Camera.h"
 #include "CameraController.h"
 #include "FileUtil.h"
+#include "Material.h"
 #include "MeshData.h"
 #include "MeshRenderer.h"
 #include "Shader.h"
@@ -23,9 +24,9 @@ public:
 	{
 		VertexShader vertexShader(ReadTextFile("resources/shaders/standard.vert"));
 		FragmentShader fragmentShader(ReadTextFile("resources/shaders/normalColor.frag"));
-		std::shared_ptr<ShaderProgram> shaderProgram = std::make_shared<ShaderProgram>(vertexShader, fragmentShader);
+		std::shared_ptr<Material> material = std::make_shared<Material>(ShaderProgram(vertexShader, fragmentShader));
 
-		AddModel(LoadModel("resources/models/bookA.fbx"), shaderProgram);
+		AddModel(LoadModel("resources/models/bookA.fbx"), material);
 
 		window->SetRenderCallback(std::bind_front(&Scene::Render, this));
 		window->SetUpdateCallback(std::bind_front(&CameraController::Update, &cameraController));
@@ -47,15 +48,15 @@ private:
 	Camera camera;
 	CameraController cameraController;
 
-	void AddModel(const Model& model, std::shared_ptr<ShaderProgram> shaderProgram)
+	void AddModel(const Model& model, std::shared_ptr<Material> material)
 	{
 		for (const MeshData& mesh : model.meshData)
 		{
-			renderers.push_back(MeshRenderer(mesh, shaderProgram));
+			renderers.push_back(MeshRenderer(mesh, material));
 		}
 		for (const Model& child : model.children)
 		{
-			AddModel(child, shaderProgram);
+			AddModel(child, material);
 		}
 	}
 };

@@ -6,13 +6,12 @@
 #include "ManagedVertexArray.h"
 #include "MeshData.h"
 
-// [TODO] Replace with Material class
-class ShaderProgram;
+class Material;
 
 class MeshRenderer
 {
 public:
-	MeshRenderer(const MeshData& meshData, std::shared_ptr<ShaderProgram> shaderProgram);
+	MeshRenderer(const MeshData& meshData, std::shared_ptr<Material> material);
 
 	void Render(double elapsedTime) const;
 
@@ -21,7 +20,7 @@ private:
 	ElementBuffer ebo;
 	ManagedVertexArray vao;
 
-	std::shared_ptr<ShaderProgram> shaderProgram;
+	std::shared_ptr<Material> material;
 
 	int drawCount;
 };

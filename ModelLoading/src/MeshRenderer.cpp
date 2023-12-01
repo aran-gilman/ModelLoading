@@ -5,14 +5,14 @@
 #include <GL/glew.h>
 
 #include "BufferOperations.h"
-#include "ShaderProgram.h"
+#include "Material.h"
 
-MeshRenderer::MeshRenderer(const MeshData& meshData, std::shared_ptr<ShaderProgram> shaderProgram) :
-	shaderProgram(shaderProgram)
+MeshRenderer::MeshRenderer(const MeshData& meshData, std::shared_ptr<Material> material) :
+	material(material)
 {
-	if (shaderProgram == nullptr)
+	if (material == nullptr)
 	{
-		throw std::invalid_argument("shaderProgram must be non-null");
+		throw std::invalid_argument("material must be non-null");
 	}
 
 	SetBufferData(vbo, meshData.vertices, BufferUsage::StaticDraw);
@@ -34,7 +34,7 @@ MeshRenderer::MeshRenderer(const MeshData& meshData, std::shared_ptr<ShaderProgr
 
 void MeshRenderer::Render(double elapsedTime) const
 {
-	BindShaderProgram(*shaderProgram);
+	material->Bind();
 	BindVertexArray(vao);
 	glDrawElements(GL_TRIANGLES, drawCount, GL_UNSIGNED_INT, 0);
 }

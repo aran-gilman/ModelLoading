@@ -7,6 +7,8 @@ class Material
 public:
 	Material(ShaderProgram shader);
 
+	void Bind() const;
+
 private:
 	ShaderProgram shader;
 };
