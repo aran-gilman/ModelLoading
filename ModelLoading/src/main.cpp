@@ -51,9 +51,9 @@ private:
 
 	void AddModel(const Model& model, std::shared_ptr<Material> material)
 	{
-		for (const MeshData& mesh : model.meshData)
+		for (const Mesh& mesh : model.meshes)
 		{
-			renderers.push_back(MeshRenderer(mesh, material));
+			renderers.push_back(MeshRenderer(mesh.meshData, material));
 		}
 		for (const Model& child : model.children)
 		{

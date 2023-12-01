@@ -5,9 +5,14 @@
 
 #include "MeshData.h"
 
+struct Mesh
+{
+	MeshData meshData;
+};
+
 struct Model
 {
-	std::vector<MeshData> meshData;
+	std::vector<Mesh> meshes;
 	std::vector<Model> children;
 };
 

@@ -9,26 +9,26 @@
 
 namespace
 {
-    MeshData ToMeshData(aiMesh* mesh, const aiScene* scene)
+    Mesh ConvertMesh(aiMesh* externalMesh, const aiScene* scene)
     {
-        MeshData meshData;
-        for (unsigned int i = 0; i < mesh->mNumVertices; i++)
+        Mesh mesh;
+        for (unsigned int i = 0; i < externalMesh->mNumVertices; i++)
         {
-            auto position = mesh->mVertices[i];
-            auto normals = mesh->mNormals[i];
-            meshData.vertices.push_back({
+            auto position = externalMesh->mVertices[i];
+            auto normals = externalMesh->mNormals[i];
+            mesh.meshData.vertices.push_back({
                 {position.x, position.y, position.z},
                 {normals.x, normals.y, normals.z} });
         }
-        for (unsigned int i = 0; i < mesh->mNumFaces; i++)
+        for (unsigned int i = 0; i < externalMesh->mNumFaces; i++)
         {
-            aiFace face = mesh->mFaces[i];
-            meshData.indices.insert(
-                meshData.indices.end(),
+            aiFace face = externalMesh->mFaces[i];
+            mesh.meshData.indices.insert(
+                mesh.meshData.indices.end(),
                 face.mIndices,
                 face.mIndices + face.mNumIndices);
         }
-        return meshData;
+        return mesh;
     }
 
     Model ProcessNode(aiNode* node, const aiScene* scene)
@@ -37,7 +37,7 @@ namespace
         for (unsigned int i = 0; i < node->mNumMeshes; i++)
         {
             aiMesh* mesh = scene->mMeshes[node->mMeshes[i]];
-            model.meshData.push_back(ToMeshData(mesh, scene));
+            model.meshes.push_back(ConvertMesh(mesh, scene));
         }
         for (unsigned int i = 0; i < node->mNumChildren; i++)
         {
