@@ -16,9 +16,6 @@ public:
 
 	void Render(double elapsedTime) const;
 
-	MeshRenderer(const MeshRenderer&) = delete;
-	MeshRenderer& operator=(const MeshRenderer&) = delete;
-
 private:
 	ArrayBuffer vbo;
 	ElementBuffer ebo;
