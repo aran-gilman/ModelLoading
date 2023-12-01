@@ -4,14 +4,14 @@
 
 MeshData CreateQuad()
 {
-    using namespace constants::vec3;
+    using namespace constants;
 
     MeshData mesh;
     mesh.vertices = {
-        {{  0.5f,  0.5f, 0.0f }, Forward },  // top right
-        {{  0.5f, -0.5f, 0.0f }, Forward },  // bottom right
-        {{ -0.5f, -0.5f, 0.0f }, Forward },  // bottom left
-        {{ -0.5f,  0.5f, 0.0f }, Forward },  // top left 
+        {{  0.5f,  0.5f, 0.0f }, vec3::Forward, vec2::One },  // top right
+        {{  0.5f, -0.5f, 0.0f }, vec3::Forward, vec2::Right },  // bottom right
+        {{ -0.5f, -0.5f, 0.0f }, vec3::Forward, vec2::Zero },  // bottom left
+        {{ -0.5f,  0.5f, 0.0f }, vec3::Forward, vec2::Up },  // top left 
     };
     mesh.indices = {
         0, 1, 3,
