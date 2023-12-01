@@ -14,6 +14,8 @@
 #include "Model.h"
 #include "Shader.h"
 #include "ShaderProgram.h"
+#include "TextureData.h"
+#include "Texture.h"
 #include "Window.h"
 
 class Scene
@@ -25,7 +27,9 @@ public:
 	{
 		VertexShader vertexShader(ReadTextFile("resources/shaders/standard.vert"));
 		FragmentShader fragmentShader(ReadTextFile("resources/shaders/normalColor.frag"));
-		std::shared_ptr<Material> material = std::make_shared<Material>(ShaderProgram(vertexShader, fragmentShader));
+
+		std::shared_ptr<Texture> texture = std::make_shared<Texture>(ReadImageFile("resources/models/diffuse.jpg"));
+		std::shared_ptr<Material> material = std::make_shared<Material>(ShaderProgram(vertexShader, fragmentShader), Material::TextureMap{ { 0, texture } });
 
 		AddModel(LoadModel("resources/models/backpack.obj"), material);
 
