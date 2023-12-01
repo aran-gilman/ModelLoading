@@ -43,26 +43,48 @@ void main()
     FragColor = vec4(abs(Normal), 1.0f);
 })s";
 
-int main(int argc, char* argv[])
+class Scene
 {
-	try
+public:
+	Scene(Window* window) :
+		camera(glm::vec3(0.0f, 0.0f, 3.0f), 800.0f / 600.0f, 45.0f),
+		cameraController(&camera)
 	{
-		Window window(800, 600, "Model Loading Test");
-
-		Camera camera(glm::vec3(0.0f, 0.0f, 3.0f), 800.0f / 600.0f, 45.0f);
-		CameraController cameraController(&camera);
-
 		VertexShader vertexShader(vertexShaderSource);
 		FragmentShader fragmentShader(fragmentShaderSource);
 		std::shared_ptr<ShaderProgram> shaderProgram = std::make_shared<ShaderProgram>(vertexShader, fragmentShader);
 
 		Model model = LoadModel("resources/models/bookA.fbx");
-		MeshRenderer meshRenderer(CreateCube(), shaderProgram);
-		window.SetRenderCallback(std::bind_front(&MeshRenderer::Render, &meshRenderer));
-		window.SetUpdateCallback(std::bind_front(&CameraController::Update, &cameraController));
-		window.SetKeyboardCallback(std::bind_front(&CameraController::HandleKeyboardInput, &cameraController));
-		window.SetScrollCallback(std::bind_front(&CameraController::HandleScrollInput, &cameraController));
 
+		renderers.push_back(MeshRenderer(CreateCube(), shaderProgram));
+
+		window->SetRenderCallback(std::bind_front(&Scene::Render, this));
+		window->SetUpdateCallback(std::bind_front(&CameraController::Update, &cameraController));
+		window->SetKeyboardCallback(std::bind_front(&CameraController::HandleKeyboardInput, &cameraController));
+		window->SetScrollCallback(std::bind_front(&CameraController::HandleScrollInput, &cameraController));
+	}
+
+	void Render(double elapsedTime)
+	{
+		for (const MeshRenderer& renderer : renderers)
+		{
+			renderer.Render(elapsedTime);
+		}
+	}
+
+private:
+	std::vector<MeshRenderer> renderers;
+
+	Camera camera;
+	CameraController cameraController;
+};
+
+int main(int argc, char* argv[])
+{
+	try
+	{
+		Window window(800, 600, "Model Loading Test");
+		Scene scene(&window);
 		window.Display();
 	}
 	catch (const std::exception& e)
