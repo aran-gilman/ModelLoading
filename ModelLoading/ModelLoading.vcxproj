@@ -171,6 +171,7 @@
     <ClInclude Include="src\Window.h" />
     <ClInclude Include="src\VectorConstants.h" />
     <ClInclude Include="src\Timer.h" />
+    <ClInclude Include="src\TextureData.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="resources\shaders\normalColor.frag" />
