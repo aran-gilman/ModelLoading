@@ -27,7 +27,12 @@ MeshRenderer::MeshRenderer(const MeshData& meshData, std::shared_ptr<Material> m
 	DefineVertexAttribute(
 		vao, vbo,
 		1, ComponentCount::Three,
-		sizeof(Vertex), offsetof(Vertex, normal));	
+		sizeof(Vertex), offsetof(Vertex, normal));
+
+	DefineVertexAttribute(
+		vao, vbo,
+		2, ComponentCount::Two,
+		sizeof(Vertex), offsetof(Vertex, uv));
 
 	drawCount = meshData.indices.size();
 }
