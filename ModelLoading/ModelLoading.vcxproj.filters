@@ -114,5 +114,6 @@
   <ItemGroup>
     <None Include="resources\shaders\normalColor.frag" />
     <None Include="resources\shaders\standard.vert" />
+    <None Include="resources\shaders\uvColor.frag" />
   </ItemGroup>
 </Project>
