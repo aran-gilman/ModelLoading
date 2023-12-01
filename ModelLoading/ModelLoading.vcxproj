@@ -139,6 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Material.cpp" />
     <ClCompile Include="src\FileUtil.cpp" />
     <ClCompile Include="src\CameraController.cpp" />
     <ClCompile Include="src\Camera.cpp" />
@@ -153,6 +154,7 @@
     <ClCompile Include="src\Timer.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Material.h" />
     <ClInclude Include="src\FileUtil.h" />
     <ClInclude Include="src\InputEnums.h" />
     <ClInclude Include="src\CameraController.h" />
