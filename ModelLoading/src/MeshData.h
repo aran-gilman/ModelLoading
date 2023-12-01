@@ -23,7 +23,7 @@ MeshData CreateCube();
 
 struct Model
 {
-	MeshData meshData;
+	std::vector<MeshData> meshData;
 	std::vector<Model> children;
 };
 

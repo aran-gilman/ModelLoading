@@ -9,6 +9,46 @@
 
 #include "VectorConstants.h"
 
+namespace
+{
+    MeshData ToMeshData(aiMesh* mesh, const aiScene* scene)
+    {
+        MeshData meshData;
+        for (unsigned int i = 0; i < mesh->mNumVertices; i++)
+        {
+            auto position = mesh->mVertices[i];
+            auto normals = mesh->mNormals[i];
+            meshData.vertices.push_back({
+                {position.x, position.y, position.z},
+                {normals.x, normals.y, normals.z}});
+        }
+        for (unsigned int i = 0; i < mesh->mNumFaces; i++)
+        {
+            aiFace face = mesh->mFaces[i];
+            meshData.indices.insert(
+                meshData.indices.end(),
+                face.mIndices,
+                face.mIndices + face.mNumIndices);
+        }
+        return meshData;
+    }
+
+    Model ProcessNode(aiNode* node, const aiScene* scene)
+    {
+        Model model;
+        for (unsigned int i = 0; i < node->mNumMeshes; i++)
+        {
+            aiMesh* mesh = scene->mMeshes[node->mMeshes[i]];
+            model.meshData.push_back(ToMeshData(mesh, scene));
+        }
+        for (unsigned int i = 0; i < node->mNumChildren; i++)
+        {
+            model.children.push_back(ProcessNode(node->mChildren[i], scene));
+        }
+        return model;
+    }
+}
+
 MeshData CreateQuad()
 {
     MeshData mesh;
@@ -128,6 +168,5 @@ Model LoadModel(const std::string& path)
     {
         throw std::runtime_error(std::format("Failed to load model: {}", importer.GetErrorString()));
     }
-    Model model;
-    return model;
+    return ProcessNode(scene->mRootNode, scene);
 }
