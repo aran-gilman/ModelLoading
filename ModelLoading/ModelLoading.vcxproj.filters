@@ -90,4 +90,8 @@
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\shaders\normalColor.frag" />
+    <None Include="resources\shaders\standard.vert" />
+  </ItemGroup>
 </Project>

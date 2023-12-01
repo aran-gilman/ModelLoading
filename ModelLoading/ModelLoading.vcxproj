@@ -166,6 +166,10 @@
     <ClInclude Include="src\VectorConstants.h" />
     <ClInclude Include="src\Timer.h" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\shaders\normalColor.frag" />
+    <None Include="resources\shaders\standard.vert" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
