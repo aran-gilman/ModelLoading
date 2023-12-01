@@ -151,6 +151,7 @@
     <ClCompile Include="src\ManagedVertexArray.cpp" />
     <ClCompile Include="src\MeshRenderer.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\TextureData.cpp" />
     <ClCompile Include="src\Window.cpp" />
     <ClCompile Include="src\Timer.cpp" />
     <ClCompile Include="src\Texture.cpp" />

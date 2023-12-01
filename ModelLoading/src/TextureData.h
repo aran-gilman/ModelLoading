@@ -1,5 +1,7 @@
 #pragma once
 
+#include <string>
+
 struct TextureData
 {
 	unsigned char* data;
@@ -7,3 +9,5 @@ struct TextureData
 	int height;
 	bool hasAlpha;
 };
+
+TextureData ReadImageFile(const std::string& path);
