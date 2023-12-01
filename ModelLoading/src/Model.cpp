@@ -16,9 +16,11 @@ namespace
         {
             auto position = externalMesh->mVertices[i];
             auto normals = externalMesh->mNormals[i];
+            auto uvs = externalMesh->mTextureCoords[0][i];
             mesh.meshData.vertices.push_back({
                 {position.x, position.y, position.z},
-                {normals.x, normals.y, normals.z} });
+                {normals.x, normals.y, normals.z},
+                {uvs.x, uvs.y} });
         }
         for (unsigned int i = 0; i < externalMesh->mNumFaces; i++)
         {
