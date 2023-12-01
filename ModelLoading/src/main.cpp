@@ -54,9 +54,7 @@ public:
 		FragmentShader fragmentShader(fragmentShaderSource);
 		std::shared_ptr<ShaderProgram> shaderProgram = std::make_shared<ShaderProgram>(vertexShader, fragmentShader);
 
-		Model model = LoadModel("resources/models/bookA.fbx");
-
-		renderers.push_back(MeshRenderer(CreateCube(), shaderProgram));
+		AddModel(LoadModel("resources/models/bookA.fbx"), shaderProgram);
 
 		window->SetRenderCallback(std::bind_front(&Scene::Render, this));
 		window->SetUpdateCallback(std::bind_front(&CameraController::Update, &cameraController));
@@ -77,6 +75,18 @@ private:
 
 	Camera camera;
 	CameraController cameraController;
+
+	void AddModel(const Model& model, std::shared_ptr<ShaderProgram> shaderProgram)
+	{
+		for (const MeshData& mesh : model.meshData)
+		{
+			renderers.push_back(MeshRenderer(mesh, shaderProgram));
+		}
+		for (const Model& child : model.children)
+		{
+			AddModel(child, shaderProgram);
+		}
+	}
 };
 
 int main(int argc, char* argv[])
