@@ -3,6 +3,8 @@
 #include <format>
 #include <stdexcept>
 
+#include "Texture.h"
+
 Material::Material(ShaderProgram shader, TextureMap textures) :
 	shader(std::move(shader)),
 	textures(std::move(textures))
@@ -24,4 +26,9 @@ Material::Material(ShaderProgram shader) :
 void Material::Bind() const
 {
 	BindShaderProgram(shader);
+	for (const auto& [unit, texture] : textures)
+	{
+		glActiveTexture(GL_TEXTURE0 + unit);
+		glBindTexture(GL_TEXTURE_2D, texture->Name());
+	}
 }

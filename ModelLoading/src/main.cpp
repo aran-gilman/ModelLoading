@@ -26,7 +26,7 @@ public:
 		cameraController(&camera)
 	{
 		VertexShader vertexShader(ReadTextFile("resources/shaders/standard.vert"));
-		FragmentShader fragmentShader(ReadTextFile("resources/shaders/normalColor.frag"));
+		FragmentShader fragmentShader(ReadTextFile("resources/shaders/unlit.frag"));
 
 		std::shared_ptr<Texture> texture = std::make_shared<Texture>(ReadImageFile("resources/models/diffuse.jpg"));
 		std::shared_ptr<Material> material = std::make_shared<Material>(ShaderProgram(vertexShader, fragmentShader), Material::TextureMap{ { 0, texture } });

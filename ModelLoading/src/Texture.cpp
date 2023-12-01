@@ -12,15 +12,16 @@ Texture::Texture(const TextureData& textureData)
 	glTextureParameteri(name, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
 	glTextureParameteri(name, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
-	unsigned int colorFormat = textureData.hasAlpha ? (unsigned int)GL_RGBA : (unsigned int)GL_RGB;
+	unsigned int format = textureData.hasAlpha ? (unsigned int)GL_RGBA : (unsigned int)GL_RGB;
+	unsigned int internalFormat = textureData.hasAlpha ? (unsigned int)GL_RGBA8 : (unsigned int)GL_RGB8;
 	glTextureStorage2D(
-		name, GL_TEXTURE_2D, colorFormat,
+		name, 1, internalFormat,
 		textureData.width, textureData.height);
 	glTextureSubImage2D(
-		name, GL_TEXTURE_2D,
+		name, 0,
 		0, 0,
 		textureData.width, textureData.height,
-		colorFormat, GL_UNSIGNED_BYTE,
+		format, GL_UNSIGNED_BYTE,
 		textureData.data);
 	glGenerateTextureMipmap(name);
 }
