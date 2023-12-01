@@ -11,6 +11,7 @@
 #include "Material.h"
 #include "MeshData.h"
 #include "MeshRenderer.h"
+#include "Model.h"
 #include "Shader.h"
 #include "ShaderProgram.h"
 #include "Window.h"
