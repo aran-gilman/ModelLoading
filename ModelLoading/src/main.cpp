@@ -1,7 +1,10 @@
+#include <filesystem>
 #include <functional>
 #include <iostream>
+#include <map>
 #include <memory>
 #include <stdexcept>
+#include <string>
 
 #include <glm/glm.hpp>
 
@@ -18,6 +21,42 @@
 #include "Texture.h"
 #include "Window.h"
 
+class MaterialManager
+{
+public:
+	MaterialManager(
+		std::string textureDirectory,
+		VertexShader vertexShader,
+		FragmentShader fragmentShader) :
+		textureDirectory(textureDirectory),
+		vertexShader(std::move(vertexShader)),
+		fragmentShader(std::move(fragmentShader))
+	{
+	}
+
+	std::shared_ptr<Material> GetOrLoad(const std::string& path)
+	{
+		if (auto existing = loadedMaterials.find(path);
+			existing != loadedMaterials.end())
+		{
+			return existing->second;
+		}
+		 
+		std::shared_ptr<Texture> texture = std::make_shared<Texture>(
+			ReadImageFile((textureDirectory / path).string()));
+		std::shared_ptr<Material> material = std::make_shared<Material>(ShaderProgram(vertexShader, fragmentShader), Material::TextureMap{ { 0, texture } });
+		loadedMaterials.emplace(path, material);
+		return material;
+	}
+
+private:
+	std::filesystem::path textureDirectory;
+	VertexShader vertexShader;
+	FragmentShader fragmentShader;
+
+	std::map<std::string, std::shared_ptr<Material>> loadedMaterials;
+};
+
 class Scene
 {
 public:
@@ -27,11 +66,10 @@ public:
 	{
 		VertexShader vertexShader(ReadTextFile("resources/shaders/standard.vert"));
 		FragmentShader fragmentShader(ReadTextFile("resources/shaders/unlit.frag"));
+		MaterialManager materialManaged(
+			"resources/models/", std::move(vertexShader), std::move(fragmentShader));
 
-		std::shared_ptr<Texture> texture = std::make_shared<Texture>(ReadImageFile("resources/models/diffuse.jpg"));
-		std::shared_ptr<Material> material = std::make_shared<Material>(ShaderProgram(vertexShader, fragmentShader), Material::TextureMap{ { 0, texture } });
-
-		AddModel(LoadModel("resources/models/backpack.obj"), material);
+		AddModel(LoadModel("resources/models/backpack.obj"), &materialManaged);
 
 		window->SetRenderCallback(std::bind_front(&Scene::Render, this));
 		window->SetUpdateCallback(std::bind_front(&CameraController::Update, &cameraController));
@@ -53,15 +91,16 @@ private:
 	Camera camera;
 	CameraController cameraController;
 
-	void AddModel(const Model& model, std::shared_ptr<Material> material)
+	void AddModel(const Model& model, MaterialManager* materialManager)
 	{
 		for (const Mesh& mesh : model.meshes)
 		{
-			renderers.push_back(MeshRenderer(mesh.meshData, material));
+			renderers.push_back(
+				MeshRenderer(mesh.meshData, materialManager->GetOrLoad(mesh.texturePath)));
 		}
 		for (const Model& child : model.children)
 		{
-			AddModel(child, material);
+			AddModel(child, materialManager);
 		}
 	}
 };
