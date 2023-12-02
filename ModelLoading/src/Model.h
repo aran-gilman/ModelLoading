@@ -8,6 +8,7 @@
 struct Mesh
 {
 	MeshData meshData;
+	std::string texturePath;
 };
 
 struct Model

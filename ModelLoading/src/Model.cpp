@@ -30,6 +30,13 @@ namespace
                 face.mIndices,
                 face.mIndices + face.mNumIndices);
         }
+        if (externalMesh->mMaterialIndex >= 0)
+        {
+            aiMaterial* material = scene->mMaterials[externalMesh->mMaterialIndex];
+            aiString path;
+            material->GetTexture(aiTextureType_DIFFUSE, 0, &path);
+            mesh.texturePath = path.C_Str();
+        }
         return mesh;
     }
 
